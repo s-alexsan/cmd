@@ -12,17 +12,17 @@ import (
 func main() {
 
 	server := gin.Default()
-	
+
 	dbConnection, err := db.ConnectDB()
-	if(err != nil) {
+	if err != nil {
 		panic(err)
 	}
-	
+
 	//Camada de repository
 	ProductRepository := repository.NewProductRepository(dbConnection)
 	// Camada usecase
 	ProductUsecase := usecase.NewProductUseCase(ProductRepository)
-	//Camada de controllers	
+	//Camada de controllers
 	productController := controller.NewProductController(ProductUsecase)
 
 	server.GET("/ping", func(ctx *gin.Context) {
@@ -30,7 +30,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-	
+
 	server.GET("/products", productController.GetProducts)
 	server.POST("/product", productController.CreateProduct)
 

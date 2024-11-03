@@ -22,7 +22,7 @@ func (p *productController) GetProducts(ctx *gin.Context) {
 
 	products, err := p.productUseCase.GetProducts()
 
-	if (err != nil) {
+	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 	}
 	ctx.JSON(http.StatusOK, products)
