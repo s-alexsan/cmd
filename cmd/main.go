@@ -32,6 +32,7 @@ func main() {
 	})
 	
 	server.GET("/products", productController.GetProducts)
+	server.POST("/product", productController.CreateProduct)
 
 	server.Run(":8000")
 
